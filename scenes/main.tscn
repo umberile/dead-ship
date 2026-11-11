@@ -1,0 +1,12 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/ships/kestrel.tscn" id="2_ship"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_main")
+ship_scene = ExtResource("2_ship")
+player_scene = ExtResource("3_player")
+hud_scene = ExtResource("4_hud")
