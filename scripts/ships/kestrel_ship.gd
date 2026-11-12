@@ -99,8 +99,12 @@ func _build_airlock() -> void:
 	ShipKit.box(r, Vector3(2.0, 0.012, 0.45), Vector3(0, 0.006, 0.34), ShipMaterials.hazard(), false)
 
 	# EVA stowage along the west wall.
-	ShipKit.box(r, Vector3(0.5, 2.1, 1.6), Vector3(-1.75, 1.05, 3.9), ShipMaterials.hull(Color(0.22, 0.3, 0.3), Vector2(0.53, 2.2), 0.5, 0.3, 0.6))
+	ShipKit.box(r, Vector3(0.5, 3.0, 1.6), Vector3(-1.75, 1.5, 3.9), ShipMaterials.hull(Color(0.22, 0.3, 0.3), Vector2(0.53, 1.0), 0.5, 0.3, 0.6))
 	ShipKit.stencil(r, "EVA STOWAGE", Vector3(-1.5, 1.85, 3.9), Vector3.RIGHT, 0.07)
+	ShipKit.inspectable(r, "EVA stowage", "Three suit racks. All three suits are gone.",
+			ShipKit.box_shape(Vector3(0.52, 3.0, 1.6)), Vector3(-1.75, 1.5, 3.9))
+	ShipKit.inspectable(r, "Docking hatch", "Hard-sealed to your shuttle. It stays shut until the report is filed.",
+			ShipKit.box_shape(Vector3(1.9, 2.5, 0.16)), Vector3(0, 1.25, 4.93))
 	ShipKit.cylinder(r, 0.06, 5.0, Vector3(1.72, 2.82, 2.5), _pipe, Vector3.BACK)
 	ShipKit.cylinder(r, 0.035, 5.0, Vector3(1.55, 2.88, 2.5), ShipMaterials.metal(Color(0.5, 0.2, 0.12), 0.5), Vector3.BACK)
 
@@ -199,6 +203,8 @@ func _build_corridor() -> void:
 	ShipKit.stencil(pod, "ESCAPE POD 2", Vector3(0, 1.82, 0.08), Vector3.BACK, 0.09)
 	ShipKit.box(pod, Vector3(0.5, 0.1, 0.02), Vector3(0, 0.34, 0.09), ShipMaterials.glow(Color(1.0, 0.15, 0.1), 1.2), false)
 	ShipKit.readout(pod, "POD LAUNCHED", Vector3(0, 0.34, 0.105), 0.05, Color(1, 0.85, 0.8))
+	ShipKit.inspectable(pod, "Escape pod berth", "Pod 2 is gone. The berth clamps were blown rather than released: nobody waited for a clean launch.",
+			ShipKit.box_shape(Vector3(1.3, 2.0, 0.1)), Vector3(0, 1.05, 0.05))
 
 	_vent(r, Vector3(0.55, 2.8, -6.9), Vector3.DOWN)
 
@@ -273,7 +279,7 @@ func _build_engineering() -> void:
 		ShipKit.box(r, Vector3(0.3, 4.0, 0.14), Vector3(x, 2.0, -24.73), _trim, false)
 	for z in [-17.3, -19.8, -22.3]:
 		ShipKit.box(r, Vector3(10.0, 0.22, 0.3), Vector3(0, 3.89, z), _trim, false)
-	ShipKit.box(r, Vector3(0.9, 0.5, 10.0), Vector3(-3.0, 3.53, -19.8), ShipMaterials.hull(Color(0.3, 0.31, 0.3), Vector2(1.25, 0.5), 0.6))
+	ShipKit.box(r, Vector3(0.9, 0.5, 10.0), Vector3(-3.0, 3.75, -19.8), ShipMaterials.hull(Color(0.3, 0.31, 0.3), Vector2(1.25, 0.5), 0.6))
 	ShipKit.cylinder(r, 0.09, 10.0, Vector3(1.4, 3.66, -19.8), _pipe, Vector3.BACK)
 	ShipKit.cylinder(r, 0.06, 10.0, Vector3(1.75, 3.7, -19.8), ShipMaterials.metal(Color(0.5, 0.2, 0.12), 0.5), Vector3.BACK)
 	ShipKit.box(r, Vector3(3.6, 0.012, 3.6), Vector3(0, 0.006, -21.3), ShipMaterials.hazard(), false)
@@ -308,6 +314,8 @@ func _build_engineering() -> void:
 	ShipKit.box(bin, Vector3(0.05, 0.5, 0.6), Vector3(-0.45, 0.25, 0), crate)
 	ShipKit.box(bin, Vector3(0.05, 0.5, 0.6), Vector3(0.45, 0.25, 0), crate)
 	ShipKit.stencil(bin, "SPARES", Vector3(0, 0.3, -0.325), Vector3.FORWARD, 0.08)
+	ShipKit.inspectable(bin, "Spares bin", "Knocked over when the air went. Whatever was in it is drifting around the compartment.",
+			ShipKit.box_shape(Vector3(0.9, 0.5, 0.06)), Vector3(0, 0.25, -0.3))
 
 	add_grime(r, "Electrical soot", Vector3(-5.0, 1.6, -20.7), Vector3.RIGHT, Vector2(2.6, 2.4), 53,
 			"Fans out from the distribution panel. The panel burned for a while.", 1.0)
@@ -368,6 +376,8 @@ func _build_gravity_generator(r: Node3D, pos: Vector3) -> void:
 		ShipKit.torus(pivot, 0.68, 0.84, Vector3.ZERO, _ring_mat)
 		ShipKit.box(pivot, Vector3(0.14, 0.2, 0.14), Vector3(0.76, 0, 0), dark, false)
 		_rings.append(pivot)
+	ShipKit.inspectable(g, "Gravity field generator", "Flywheel rings around an air-cooled coil stack. It will not spin up without atmosphere to carry the heat away.",
+			ShipKit.cylinder_shape(0.44, 3.2), Vector3(0, 2.0, 0))
 	_grav_hum = Sfx.make_loop(&"grav_loop", g, -60.0, 6.0)
 	_grav_hum.position = Vector3(0, 1.5, 0)
 
@@ -402,7 +412,9 @@ func _build_life_support(r: Node3D) -> void:
 	ShipKit.cylinder(r, 0.5, 0.06, Vector3(3.69, 1.45, -16.2), _trim, Vector3.RIGHT, false, 20)
 	ShipKit.cylinder(r, 0.42, 0.07, Vector3(3.69, 1.45, -16.2), ShipMaterials.paint(Color(0.02, 0.02, 0.025), 0.4), Vector3.RIGHT, false, 20)
 	ShipKit.stencil(r, "ATMOSPHERE PLANT", Vector3(3.7, 0.55, -16.2), Vector3.LEFT, 0.08)
-	ShipKit.cylinder(r, 0.16, 1.8, Vector3(4.3, 3.1, -16.2), _pipe, Vector3.UP)
+	ShipKit.box(r, Vector3(1.0, 1.8, 1.5), Vector3(4.4, 3.1, -16.2), ShipMaterials.hull(Color(0.2, 0.22, 0.24), Vector2(0.5, 0.9), 0.6))
+	ShipKit.inspectable(r, "Atmosphere plant", "Scrubbers, reserve tanks and circulation fans. Intact: it only needs power.",
+			ShipKit.box_shape(Vector3(1.22, 2.2, 1.8)), Vector3(4.3, 1.1, -16.2))
 	_fan = Sfx.make_loop(&"fan_loop", r, -60.0, 6.0)
 	_fan.position = Vector3(3.8, 1.45, -16.2)
 
@@ -433,9 +445,13 @@ func _build_breach_area(r: Node3D) -> void:
 	# Coolant tanks.
 	var tank := ShipMaterials.hull(Color(0.35, 0.4, 0.42), Vector2(1.0, 1.0), 0.6, 0.6, 0.45)
 	for x in [3.9, 2.4]:
-		ShipKit.cylinder(r, 0.65, 3.0, Vector3(x, 1.5, -23.8), tank, Vector3.UP, true, 20)
+		ShipKit.cylinder(r, 0.65, 4.0, Vector3(x, 2.0, -23.8), tank, Vector3.UP, true, 20)
 		ShipKit.cylinder(r, 0.68, 0.12, Vector3(x, 0.8, -23.8), _trim, Vector3.UP, false, 20)
 		ShipKit.cylinder(r, 0.68, 0.12, Vector3(x, 2.3, -23.8), _trim, Vector3.UP, false, 20)
+		ShipKit.inspectable(r, "Coolant tank", "Reserve coolant. The gauge reads empty: it all went out through the burst line.",
+				ShipKit.cylinder_shape(0.66, 4.0), Vector3(x, 2.0, -23.8))
+	# Cradle behind the tanks (also stops debris drifting out of reach).
+	ShipKit.box(r, Vector3(3.2, 4.0, 0.7), Vector3(3.3, 2.0, -24.45), _trim)
 	ShipKit.stencil(r, "COOLANT", Vector3(3.15, 1.6, -23.14), Vector3.BACK, 0.12, Color(0.7, 0.85, 0.9))
 
 
@@ -507,7 +523,7 @@ func _process(delta: float) -> void:
 	_ring_speed = move_toward(_ring_speed, 1.0 if gravity else 0.0, delta * 0.35)
 	for i in _rings.size():
 		_rings[i].rotate_object_local(Vector3.UP, _ring_speed * delta * (1.8 + i * 0.5) * (1.0 if i % 2 == 0 else -1.0))
-	_ring_mat.emission_energy_multiplier = _ring_speed * 2.4
+	_ring_mat.emission_energy_multiplier = _ring_speed * 1.4
 	_loop_level(_grav_hum, _ring_speed, 0.7)
 
 	var pumping := systems.are_pumps_running()

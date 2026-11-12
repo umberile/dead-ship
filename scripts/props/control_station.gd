@@ -41,7 +41,7 @@ func _ready() -> void:
 	var screen_x := -0.2 if has_lever else 0.0
 	var screen_w := 0.56 if has_lever else 0.9
 	ShipKit.box(self, Vector3(screen_w, 0.4, 0.02), Vector3(screen_x, y - 0.03, face + 0.008), _screen_mat, false)
-	_readout = ShipKit.readout(self, "", Vector3(screen_x, y - 0.03, face + 0.022), 0.034)
+	_readout = ShipKit.readout(self, "", Vector3(screen_x, y - 0.03, face + 0.022), 0.043)
 	_readout.width = screen_w / _readout.pixel_size * 0.94
 	_readout.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_readout.line_spacing = 2.0

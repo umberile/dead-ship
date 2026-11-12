@@ -192,9 +192,9 @@ func add_emergency_light(parent: Node3D, pos: Vector3, facing: Vector3) -> ShipL
 	var l := ShipLight.new()
 	l.is_emergency = true
 	l.color = Color(1.0, 0.12, 0.06)
-	l.energy = 0.9
-	l.light_range = 5.5
-	l.cast_shadows = false
+	l.energy = 0.5
+	l.light_range = 5.0
+	l.cast_shadows = true  # otherwise the red glow leaks through bulkheads
 	l.fixture_size = Vector3(0.22, 0.12, 0.07)
 	parent.add_child(l)
 	ShipKit.place(l, pos, facing)
@@ -307,14 +307,17 @@ func _build_environment() -> void:
 	_environment.glow_intensity = 0.7
 	_environment.glow_bloom = 0.08
 	_environment.glow_hdr_threshold = 1.1
-	_environment.ssao_enabled = true
-	_environment.ssao_radius = 0.8
-	_environment.ssao_intensity = 1.6
-	# Haze only exists where there is air: it fades in as the ship repressurises.
-	_environment.volumetric_fog_enabled = true
-	_environment.volumetric_fog_density = 0.0
-	_environment.volumetric_fog_albedo = Color(0.8, 0.86, 0.92)
-	_environment.volumetric_fog_length = 40.0
+	# SSAO and volumetric haze exist only in Forward+; the OpenGL fallback
+	# simply goes without them.
+	if RenderingServer.get_current_rendering_method() == "forward_plus":
+		_environment.ssao_enabled = true
+		_environment.ssao_radius = 0.8
+		_environment.ssao_intensity = 1.6
+		# Haze only exists where there is air: it fades in as the ship repressurises.
+		_environment.volumetric_fog_enabled = true
+		_environment.volumetric_fog_density = 0.0
+		_environment.volumetric_fog_albedo = Color(0.8, 0.86, 0.92)
+		_environment.volumetric_fog_length = 40.0
 	var world_env := WorldEnvironment.new()
 	world_env.name = "WorldEnvironment"
 	world_env.environment = _environment

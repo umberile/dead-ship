@@ -466,8 +466,8 @@ func _build() -> void:
 			contract.client.to_upper(), contract.contract_id, contract.vessel_name.to_upper()]
 	var intro_label := _centered(_label(intro_text, 18, WHITE))
 	intro_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	intro_label.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_intro.add_child(intro_label)
+	intro_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 	# Pause.
 	_pause = _overlay("PAUSED\n\n[ESC] Resume     [R] Restart contract     [Q] Quit", 20)
@@ -509,7 +509,7 @@ func _panel(accent: Color) -> PanelContainer:
 func _full_rect(c: Control) -> void:
 	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.add_child(c)
-	c.set_anchors_preset(Control.PRESET_FULL_RECT)
+	c.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 
 ## A dimmed full-screen overlay with one centred panel of text. The text label
@@ -522,7 +522,7 @@ func _overlay(text: String, size: int) -> Control:
 	var centre := CenterContainer.new()
 	centre.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	dim.add_child(centre)
-	centre.set_anchors_preset(Control.PRESET_FULL_RECT)
+	centre.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var panel := _panel(AMBER)
 	centre.add_child(panel)
 	var label := _centered(_label(text, size, WHITE))

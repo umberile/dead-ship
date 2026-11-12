@@ -59,10 +59,10 @@ func _refresh() -> void:
 		return
 	var lines := PackedStringArray()
 	for i in feeds.size():
-		lines.append("BUS %s   %s" % [char(65 + i), "OK" if feeds[i].is_repaired else "OPEN CIRCUIT"])
+		lines.append("BUS %s   %s" % [char(65 + i), "OK" if feeds[i].is_repaired else "OPEN"])
 	lines.append("FUSE F1 %s" % ("OK" if socket.is_filled() else "FAULT"))
 	if not is_repaired:
-		lines.append("** DISTRIBUTION FAULT **")
+		lines.append("DISTRIBUTION FAULT")
 		_status.modulate = Color(1.0, 0.35, 0.25)
 	elif breaker.is_on:
 		lines.append("MAIN BUS LIVE")
@@ -118,4 +118,4 @@ func _build() -> void:
 		breaker_toggled.emit(on))
 
 	ShipKit.box(self, Vector3(0.52, 0.36, 0.02), Vector3(0.33, 0.45, 0.275), ShipMaterials.paint(Color(0.01, 0.012, 0.014), 0.3), false)
-	_status = ShipKit.readout(self, "", Vector3(0.33, 0.45, 0.29), 0.036)
+	_status = ShipKit.readout(self, "", Vector3(0.33, 0.45, 0.29), 0.04)

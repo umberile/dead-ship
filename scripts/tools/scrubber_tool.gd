@@ -11,13 +11,13 @@ func _init() -> void:
 
 
 func _build_model(root: Node3D) -> void:
-	part(root, box_mesh(Vector3(0.05, 0.05, 0.3)), Vector3(0, 0, 0.08), Color(0.13, 0.14, 0.15))
-	part(root, box_mesh(Vector3(0.07, 0.075, 0.1)), Vector3(0, 0.0, 0.2), Color(0.85, 0.42, 0.08), Vector3.ZERO, 0.0, 0.1, 0.7)
+	part(root, box_mesh(Vector3(0.045, 0.045, 0.24)), Vector3(0, 0, 0.05), Color(0.13, 0.14, 0.15))
+	part(root, box_mesh(Vector3(0.055, 0.055, 0.07)), Vector3(0, 0, 0.14), Color(0.07, 0.07, 0.075), Vector3.ZERO, 0.0, 0.0, 0.95)
 	_head = Node3D.new()
 	_head.position = Vector3(0, 0, -0.1)
 	root.add_child(_head)
-	part(_head, box_mesh(Vector3(0.2, 0.05, 0.1)), Vector3.ZERO, Color(0.85, 0.42, 0.08), Vector3.ZERO, 0.0, 0.1, 0.7)
-	part(_head, box_mesh(Vector3(0.21, 0.03, 0.03)), Vector3(0, 0, -0.06), Color(0.86, 0.87, 0.82), Vector3.ZERO, 0.0, 0.0, 1.0)
+	part(_head, box_mesh(Vector3(0.2, 0.05, 0.09)), Vector3.ZERO, Color(0.85, 0.42, 0.08), Vector3.ZERO, 0.0, 0.1, 0.7)
+	part(_head, box_mesh(Vector3(0.21, 0.035, 0.03)), Vector3(0, 0, -0.055), Color(0.86, 0.87, 0.82), Vector3.ZERO, 0.0, 0.0, 1.0)
 	part(_head, box_mesh(Vector3(0.012, 0.012, 0.012)), Vector3(0.07, 0.03, 0.02), Color(0.3, 1.0, 0.6), Vector3.ZERO, 2.5)
 
 

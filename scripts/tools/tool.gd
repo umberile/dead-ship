@@ -20,7 +20,7 @@ var _fx: Node3D
 var _particles: CPUParticles3D
 var _light: OmniLight3D
 var _audio: AudioStreamPlayer3D
-var _rest := Vector3(0.3, -0.25, -0.58)
+var _rest := Vector3(0.4, -0.31, -0.62)
 var _equip_t := 0.0
 var _time := 0.0
 var _light_energy := 0.0
@@ -29,6 +29,7 @@ var _light_energy := 0.0
 func _ready() -> void:
 	_model = Node3D.new()
 	_model.name = "Model"
+	_model.scale = Vector3.ONE * 0.9
 	add_child(_model)
 	_build_model(_model)
 	for mi in _model.find_children("*", "MeshInstance3D", true, false):
@@ -98,7 +99,7 @@ func _process(delta: float) -> void:
 	var raise := (1.0 - _equip_t) * (1.0 - _equip_t)
 	var pos := _rest + Vector3(0, -0.35 * raise, 0)
 	pos.y += sin(_time * 1.3) * 0.004
-	_model.rotation = Vector3.ZERO
+	_model.rotation = Vector3(0.1, 0.32, 0.0)
 	if working:
 		pos += Vector3(randf_range(-1, 1), randf_range(-1, 1), 0) * 0.0025
 		pos.z -= 0.05

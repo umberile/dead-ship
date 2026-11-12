@@ -15,7 +15,7 @@ const SECTORS := 12
 const AUTO_FINISH := 0.94
 
 @export var radius := 0.75
-@export var seal_rate := 1.7
+@export var seal_rate := 1.25
 @export var pull_strength := 5.0
 
 var is_sealed := false

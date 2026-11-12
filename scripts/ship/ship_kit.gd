@@ -105,6 +105,38 @@ static func _label(text: String, height: float, color: Color) -> Label3D:
 	return l
 
 
+## Scenery the player can look at and read about but not operate. `shape`
+## should hug the visible object so it never hides loose items from the ray.
+static func inspectable(parent: Node3D, display_name: String, description: String, shape: Shape3D,
+		pos: Vector3) -> Interactable:
+	var cs := CollisionShape3D.new()
+	cs.shape = shape
+	var body := StaticBody3D.new()
+	body.collision_layer = Layers.INTERACT
+	body.collision_mask = 0
+	body.position = pos
+	body.add_child(cs)
+	parent.add_child(body)
+	var it := Interactable.new()
+	it.display_name = display_name
+	it.description = description
+	body.add_child(it)
+	return it
+
+
+static func box_shape(size: Vector3) -> BoxShape3D:
+	var s := BoxShape3D.new()
+	s.size = size
+	return s
+
+
+static func cylinder_shape(radius: float, height: float) -> CylinderShape3D:
+	var s := CylinderShape3D.new()
+	s.radius = radius
+	s.height = height
+	return s
+
+
 ## Orients `node` so its local +Z points along `facing` (out of the surface it
 ## is mounted on) and moves it to `pos`.
 static func place(node: Node3D, pos: Vector3, facing: Vector3) -> void:
